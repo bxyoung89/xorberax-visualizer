@@ -1,0 +1,15 @@
+{
+  "name": "xorberax-visualizer",
+  "version": "0.0.1",
+  "scripts": {
+    "gif2luminosity": "node tools/gif2luminosity.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "pixel-getter": "0.0.5",
+    "gif-frames": "0.4.0",
+    "gif-info": "1.0.1",
+    "to-array-buffer": "2.1.0",
+    "jimp": "0.2.28"
+  }
+}
