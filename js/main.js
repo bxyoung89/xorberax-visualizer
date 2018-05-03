@@ -1,4 +1,4 @@
-import getImage from '/js/get-image';
+import getImage from './get-image';
 
 console.log('hello!');
 
