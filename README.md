@@ -9,8 +9,6 @@ To run
 
 code parts
 
-- music visualisation (maybe divs with velocity? canvas?)
-
+- music playing
+- music visualisation (d3)
 - track select
-- gif select
-- pallet select
