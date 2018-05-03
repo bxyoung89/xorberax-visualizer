@@ -1,17 +1,21 @@
 class GifRenderer {
-	constructor(canvasId, gifData) {
+	constructor(canvasId, gifData, palette, canvasRenderer) {
 		this.gifData = gifData;
 		this.canvas = document.getElementById(canvasId);
 		this.canvasContext = this.canvas.getContext('2d');
+		this.currentFrame = 0;
+		this.palette = palette;
+		this.canvasRenderer = canvasRenderer;
 		this.setScale();
 		this.setPadding();
-		this.setCanvasHeight();
-		this.currentFrame = 0;
+		this.setUpCanvas();
 	}
 
-	setCanvasHeight() {
+	setUpCanvas() {
 		this.canvas.width = window.innerWidth;
 		this.canvas.height = window.innerHeight;
+		this.canvasContext.fillStyle = this.palette(0);
+		this.canvasContext.fillRect(0, 0, window.innerWidth, window.innerHeight);
 	}
 
 	setScale() {
@@ -44,9 +48,8 @@ class GifRenderer {
 
 	renderCurrentFrame() {
 		const {pixels} = this.gifData.files[this.currentFrame];
-		pixels.forEach(({x, y, luminosity}) => {
-			this.canvasContext.fillStyle = luminosity > 0.5 ? '#FFF' : '#000';
-			this.canvasContext.fillRect(x * this.scale + this.leftPadding, y * this.scale + this.topPadding, this.scale, this.scale);
+		pixels.forEach((pixel) => {
+			this.canvasRenderer(this.canvasContext, pixel, this.scale, this.leftPadding, this.topPadding, this.palette);
 		});
 	}
 }
