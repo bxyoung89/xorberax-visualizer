@@ -5,6 +5,11 @@
 		<title>Xorberax Visualizer</title>
 		<script src="https://d3js.org/d3.v5.min.js"></script>
 		<style>
+			* {
+				box-sizing: border-box;
+				font-family: "Lucida Console", Monaco, monospace;
+			}
+
 			html,
 			body {
 				padding: 0;
@@ -24,7 +29,7 @@
 				font-size: 16px;
 				line-height: 40px;
 				width: 100%;
-				font-family: "Lucida Console", Monaco, monospace;
+
 			}
 
 			.header-marquee {
@@ -55,6 +60,55 @@
 
 			.body {
 				flex: 1;
+				position: relative;
+			}
+
+			.controls {
+				position: absolute;
+				top: 20px;
+				right: 20px;
+				padding: 20px;
+			}
+
+			.controls-content {
+				position: relative;
+			}
+
+			.controls-background {
+				position: absolute;
+				top: -23px;
+				left: -23px;
+				bottom: -23px;
+				right: -23px;
+				border: 3px solid #fff;
+				z-index: 1;
+			}
+
+			.controls-border {
+				position: absolute;
+				top: -22px;
+				left: -22px;
+				bottom: -22px;
+				right: -22px;
+				border: 1px solid #fff;
+				z-index: 1;
+			}
+
+			.select-with-label {
+				position: relative;
+				z-index: 2;
+				margin-bottom: 10px;
+			}
+
+			.select-with-label label {
+				display: block;
+				margin-bottom: 5px;
+			}
+
+			.select-with-label select {
+				line-height: 40px;
+				width: 100%;
+				display: block;
 			}
 		</style>
 	</head>
@@ -69,6 +123,45 @@
 		</div>
 		<div class="body" id="body">
 			<canvas id="gif-canvas" class="gif-canvas"></canvas>
+			<div class="controls">
+				<div class="controls-content">
+					<div class="controls-background"></div>
+					<div class="controls-border"></div>
+					<div class="select-with-label">
+						<label>
+							What do you want to see in your life?
+						</label>
+						<select id="image-selector">
+							<option value="hard-core-karaoke.json">Hard core dancing</option>
+							<option value="pimp-hank-with-money.json" selected>Dolla Dolla Bills, Y'all</option>
+							<option value="moe-money-moe-problems.json">Dolla Dolla Bills, Y'all... but cute</option>
+							<option value="sailorwave.json">Da Streets</option>
+						</select>
+					</div>
+					<div class="select-with-label">
+						<label>
+							What's Yo Color?
+						</label>
+						<select id="palette-selector">
+							<option value="black2Red" selected>VirtualBoy</option>
+							<option value="rainbow">All o Dem</option>
+							<option value="miami">Vice City</option>
+							<option value="gameboy">IT AINT NO GAME, BOY!</option>
+						</select>
+					</div>
+					<div class="select-with-label">
+						<label>
+							What's Yo Style?
+						</label>
+						<select id="canvas-renderer-selector">
+							<option value="basicLuminosity">Simple is Best</option>
+							<option value="paletteLuminosity" selected>Colorful</option>
+							<option value="halfTone">Half Full</option>
+						</select>
+					</div>
+				</div>
+
+			</div>
 		</div>
 		<script src="./js/main.js" type="module">
 		</script>
