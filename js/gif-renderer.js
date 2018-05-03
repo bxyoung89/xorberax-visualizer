@@ -43,7 +43,7 @@ class GifRenderer {
 		this.currentFrame = (this.currentFrame + 1) % Object.keys(this.gifData.files).length;
 		this.renderCurrentFrame();
 		const {delay} = this.gifData.files[this.currentFrame];
-		setTimeout(() => this.runNextFrame(), delay);
+		setTimeout(() => this.runNextFrame(), 0);
 	}
 
 	renderCurrentFrame() {
