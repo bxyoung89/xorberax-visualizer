@@ -1,8 +1,9 @@
 import getImage from './get-image.js';
+import GifRenderer from "./gif-renderer.js";
 
-console.log('hello!');
+const canvasId = 'gif-canvas';
 
 getImage('pimp-hank-with-money.json').then((json) => {
-	const contentElement = document.getElementById('content');
-	contentElement.innerHTML = json;
+	const gifRenderer = new GifRenderer(canvasId, json);
+	gifRenderer.runAnimation();
 });
