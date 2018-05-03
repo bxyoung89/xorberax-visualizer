@@ -6,6 +6,6 @@ import palettes from './palettes.js';
 const canvasId = 'gif-canvas';
 
 getImage('pimp-hank-with-money.json').then((json) => {
-	const gifRenderer = new GifRenderer(canvasId, json, palettes.black2Red, canvasRenderers.halfTone);
+	const gifRenderer = new GifRenderer(canvasId, json, palettes.black2Red, canvasRenderers.palletLuminosity);
 	gifRenderer.runAnimation();
 });
