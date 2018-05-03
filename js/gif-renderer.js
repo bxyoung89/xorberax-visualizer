@@ -1,8 +1,17 @@
 class GifRenderer {
 	constructor(canvasId, gifData, palette, canvasRenderer) {
-		this.gifData = gifData;
 		this.canvas = document.getElementById(canvasId);
 		this.canvasContext = this.canvas.getContext('2d');
+		this.loadNewSettings(gifData, palette, canvasRenderer);
+		this.lastTimeout = undefined;
+	}
+
+	loadNewSettings(gifData, palette, canvasRenderer){
+		if(this.lastTimeout){
+			clearTimeout(this.lastTimeout);
+			this.lastTimeout = undefined;
+		}
+		this.gifData = gifData;
 		this.currentFrame = 0;
 		this.palette = palette;
 		this.canvasRenderer = canvasRenderer;
@@ -32,10 +41,10 @@ class GifRenderer {
 	}
 
 	runAnimation() {
-		setTimeout(() => {
+		this.lastTimeout = setTimeout(() => {
 			this.renderCurrentFrame();
 			const {delay} = this.gifData.files[this.currentFrame];
-			setTimeout(() => this.runNextFrame(), delay);
+			this.lastTimeout = setTimeout(() => this.runNextFrame(), delay);
 		}, 0);
 	}
 
@@ -43,7 +52,7 @@ class GifRenderer {
 		this.currentFrame = (this.currentFrame + 1) % Object.keys(this.gifData.files).length;
 		this.renderCurrentFrame();
 		const {delay} = this.gifData.files[this.currentFrame];
-		setTimeout(() => this.runNextFrame(), 0);
+		this.lastTimeout = setTimeout(() => this.runNextFrame(), 0);
 	}
 
 	renderCurrentFrame() {
