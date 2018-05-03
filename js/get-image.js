@@ -1,7 +1,7 @@
 const getImage = (imageName) => {
 	return new Promise((resolve, reject) => {
-		fetch(`/images/${imageName}`).then((data) => {
-			resolve(data);
+		fetch(`./images/${imageName}`).then((response) => {
+			response.json().then((data) => resolve(data));
 		})
 	});
 };
