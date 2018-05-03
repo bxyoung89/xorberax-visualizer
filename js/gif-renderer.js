@@ -20,24 +20,32 @@ class GifRenderer {
 		this.setUpCanvas();
 	}
 
+	getParentWidth() {
+		return this.canvas.parentElement.clientWidth
+	}
+
+	getParentHeight() {
+		return this.canvas.parentElement.clientHeight;
+	}
+
 	setUpCanvas() {
-		this.canvas.width = window.innerWidth;
-		this.canvas.height = window.innerHeight;
+		this.canvas.width = this.getParentWidth();
+		this.canvas.height = this.getParentHeight();
 		this.canvasContext.fillStyle = this.palette(0);
-		this.canvasContext.fillRect(0, 0, window.innerWidth, window.innerHeight);
+		this.canvasContext.fillRect(0, 0, this.getParentWidth(), this.getParentHeight());
 	}
 
 	setScale() {
 		const {dimensions} = this.gifData;
 		const {width, height} = dimensions;
-		this.scale = Math.min(Math.round(window.innerWidth / width), Math.round(window.innerHeight / height));
+		this.scale = Math.min(Math.round(this.getParentWidth() / width), Math.round(this.getParentHeight() / height));
 	}
 
 	setPadding() {
 		const {dimensions} = this.gifData;
 		const {width, height} = dimensions;
-		this.leftPadding = Math.round((window.innerWidth - (width * this.scale)) / 2);
-		this.topPadding = Math.round((window.innerHeight - (height * this.scale)) / 2);
+		this.leftPadding = Math.round((this.getParentWidth() - (width * this.scale)) / 2);
+		this.topPadding = Math.round((this.getParentHeight() - (height * this.scale)) / 2);
 	}
 
 	runAnimation() {

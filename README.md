@@ -9,13 +9,6 @@ To run
 
 code parts
 
-gif visualization
-- do basic canvas rendering
-- if slow change data
-- do pixel scaling
-- do centering
-
-
 - music visualisation (maybe divs with velocity? canvas?)
 
 - track select
