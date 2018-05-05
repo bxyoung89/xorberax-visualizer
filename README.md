@@ -9,6 +9,9 @@ To run
 
 code parts
 
+- figure out vertex shaders
+- always have single color background
+
 - music playing
 - music visualisation (d3)
 - track select

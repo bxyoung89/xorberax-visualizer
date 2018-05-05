@@ -1,73 +1,56 @@
+import * as THREE from "./libs/three.module.js";
+import scene from "./three-js-objects/scene.js";
+import clearScene from './clear-scene.js';
+
 class GifRenderer {
-	constructor(canvasId, gifData, palette, canvasRenderer) {
-		this.canvas = document.getElementById(canvasId);
-		this.canvasContext = this.canvas.getContext('2d');
-		this.loadNewSettings(gifData, palette, canvasRenderer);
-		this.lastTimeout = undefined;
-	}
-
-	loadNewSettings(gifData, palette, canvasRenderer){
-		if(this.lastTimeout){
+	setGif(gifData, palette, vertexShader){
+		clearScene();
+		if(this.lastTimeout !== undefined){
 			clearTimeout(this.lastTimeout);
-			this.lastTimeout = undefined;
 		}
+		this.lastTimeout = undefined;
+		this.currentFrameIndex = 0;
 		this.gifData = gifData;
-		this.currentFrame = 0;
-		this.palette = palette;
-		this.canvasRenderer = canvasRenderer;
-		this.setScale();
-		this.setPadding();
-		this.setUpCanvas();
+		this.meshes = {};
+		this.addFramesToScene(palette, vertexShader);
 	}
 
-	getParentWidth() {
-		return this.canvas.parentElement.clientWidth
-	}
+	addFramesToScene(palette, vertexShader) {
+		Object.keys(this.gifData.frameData).forEach((key, index) => {
+			const numberKey = Number.parseInt(key);
+			const geometry = new THREE.PlaneGeometry(10, 10 * .75);
+			const material = new THREE.ShaderMaterial({
+				fragmentShader: palette.shader,
+				vertexShader: vertexShader.shader,
+				uniforms: {
+					texture: {type: "t", value: THREE.ImageUtils.loadTexture(`./images/${this.gifData.imageFolder}/${numberKey}.jpg`)}
+				},
+			});
 
-	getParentHeight() {
-		return this.canvas.parentElement.clientHeight;
-	}
-
-	setUpCanvas() {
-		this.canvas.width = this.getParentWidth();
-		this.canvas.height = this.getParentHeight();
-		this.canvasContext.fillStyle = this.palette(0);
-		this.canvasContext.fillRect(0, 0, this.getParentWidth(), this.getParentHeight());
-	}
-
-	setScale() {
-		const {dimensions} = this.gifData;
-		const {width, height} = dimensions;
-		this.scale = Math.min(Math.round(this.getParentWidth() / width), Math.round(this.getParentHeight() / height));
-	}
-
-	setPadding() {
-		const {dimensions} = this.gifData;
-		const {width, height} = dimensions;
-		this.leftPadding = Math.round((this.getParentWidth() - (width * this.scale)) / 2);
-		this.topPadding = Math.round((this.getParentHeight() - (height * this.scale)) / 2);
+			const mesh = new THREE.Mesh(geometry, material);
+			mesh.position.set(0, 0, index === 0 ? 1 : 0);
+			scene.add(mesh);
+			this.meshes[numberKey] = mesh;
+		});
 	}
 
 	runAnimation() {
-		this.lastTimeout = setTimeout(() => {
-			this.renderCurrentFrame();
-			const {delay} = this.gifData.files[this.currentFrame];
-			this.lastTimeout = setTimeout(() => this.runNextFrame(), delay);
-		}, 0);
+		this.runNextFrame();
 	}
 
 	runNextFrame() {
-		this.currentFrame = (this.currentFrame + 1) % Object.keys(this.gifData.files).length;
 		this.renderCurrentFrame();
-		const {delay} = this.gifData.files[this.currentFrame];
-		this.lastTimeout = setTimeout(() => this.runNextFrame(), 0);
+		const delay = this.gifData.frameData[this.currentFrameIndex];
+		this.lastTimeout = setTimeout(() => this.runNextFrame(), delay);
+		this.currentFrameIndex = (this.currentFrameIndex + 1) % Object.keys(this.gifData.frameData).length;
 	}
 
 	renderCurrentFrame() {
-		const {pixels} = this.gifData.files[this.currentFrame];
-		pixels.forEach((pixel) => {
-			this.canvasRenderer(this.canvasContext, pixel, this.scale, this.leftPadding, this.topPadding, this.palette);
-		});
+		Object.keys(this.meshes).forEach((key) => {
+			const numberKey = Number.parseInt(key);
+			const mesh = this.meshes[numberKey];
+			mesh.position.set(0, 0, numberKey === this.currentFrameIndex ? 1 : 0);
+		})
 	}
 }
 
