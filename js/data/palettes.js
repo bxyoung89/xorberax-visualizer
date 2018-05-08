@@ -4,6 +4,38 @@ const rainbowScale = d3.scaleLinear().domain([0, 0.14, 0.28, 0.42, 0.56, 0.7, 0.
 const gameboyScale = d3.scaleLinear().domain([0, 0.33, 0.66, 1]).range(['#0f380f', '#306230', '#8bac0f', '#9bbc0f']);
 
 export default [
+	// {
+	// 	name: 'VirtualBoy Half Tone',
+	// 	luminosityFunction: (luminosity) => {
+	// 		return black2RedScale(luminosity);
+	// 	},
+	// 	shader: `
+	// 		uniform sampler2D texture;
+	// 		uniform vec2 resolution;
+	// 		varying vec2 vUv;
+	// 					varying mat4  projMatrix;
+	// 		varying mat4  mvMatrix;
+	// 		void main() {
+	// 		  float calculatedX = floor(vUv[0] * resolution[0]);
+	// 		  float calculatedY = floor((1.0 - vUv[1]) * resolution[1]);
+	// 		  float nearestX = floor(calculatedX / 10.0) * 10.0 + 5.0;
+	// 		  float nearestY = floor(calculatedY / 10.0) * 10.0 + 5.0;
+	// 		  vec2 convertedPixel = vec2(nearestX/resolution[0], 1.0 - (nearestY/resolution[1]) );
+	// 		  // vec2 convertedPixel = vec2(nearestX/resolution[0], vUv[1] );
+	// 		  // vec2 convertedPixel = vec2(vUv[0] , 1.0);
+	// 			vec4 tColor = texture2D( texture, convertedPixel );
+	// 			gl_FragColor = tColor;
+	// 			// float luminosity = 0.299 * tColor[0] + 0.587 * tColor[1] + 0.114 * tColor[2];
+	// 			// vec4 themeColor = vec4(1.0, 0.0, 0.0, 0.0);
+	// 			// gl_FragColor = vec4(luminosity * themeColor[0], luminosity * themeColor[1], luminosity * themeColor[2], 0.0);
+	// 		}
+	// 		`,
+	// 	backgroundShader: `
+	// 	  void main() {
+	// 			gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0);
+	// 	  }
+	// 	`,
+	// },
 	{
 		name: 'VirtualBoy',
 		luminosityFunction: (luminosity) => {
@@ -19,6 +51,11 @@ export default [
 				gl_FragColor = vec4(luminosity * themeColor[0], luminosity * themeColor[1], luminosity * themeColor[2], 0.0);
 			}
 			`,
+		backgroundShader: `
+		  void main() {
+				gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0);
+		  }
+		`,
 	},
 	{
 		name: 'All \'o Dem',
@@ -47,6 +84,11 @@ export default [
 				gl_FragColor = vec4(luminosity * color[0], luminosity * color[1], luminosity * color[2], 0.0);
 			}
 			`,
+		backgroundShader: `
+		  void main() {
+				gl_FragColor = vec4(0.5803921568627451, 0, 0.8274509803921568, 0.0);
+		  }
+		`,
 	},
 	{
 		name: 'Ti esrever dna ti pilf, nwod gniht ym tup',
@@ -75,6 +117,11 @@ export default [
 				gl_FragColor = vec4(luminosity * color[0], luminosity * color[1], luminosity * color[2], 0.0);
 			}
 			`,
+		backgroundShader: `
+		  void main() {
+				gl_FragColor = vec4(0.5803921568627451, 0, 0.8274509803921568, 0.0);
+		  }
+		`,
 	},
 	{
 		name: 'Vice City',
@@ -94,6 +141,11 @@ export default [
 				gl_FragColor = vec4(color[0], color[1], color[2], 1.0);
 			}
 			`,
+		backgroundShader: `
+		  void main() {
+				gl_FragColor = vec4(0.88235294117,0.23529411764,0.69019607843, 0.0);
+		  }
+		`,
 	},
 	{
 		name: 'THIS AIN\'T NO GAME, BOY',
@@ -116,5 +168,37 @@ export default [
 				gl_FragColor = vec4(luminosity * color[0], luminosity * color[1], luminosity * color[2], 0.0);
 			}
 			`,
+		backgroundShader: `
+		  void main() {
+				gl_FragColor = vec4(0.058823529411764705, 0.2196078431372549, 0.058823529411764705, 0.0);
+		  }
+		`,
+	},
+	{
+		name: 'Pixelated',
+		luminosityFunction: (luminosity) => {
+			return black2RedScale(luminosity);
+		},
+		shader: `
+			uniform sampler2D texture;
+			uniform vec2 resolution;
+			varying vec2 vUv;
+						varying mat4  projMatrix;
+			varying mat4  mvMatrix;
+			void main() {
+			  float calculatedX = floor(vUv[0] * resolution[0]);
+			  float calculatedY = floor((1.0 - vUv[1]) * resolution[1]);
+			  float nearestX = floor(calculatedX / 10.0) * 10.0 + 5.0;
+			  float nearestY = floor(calculatedY / 10.0) * 10.0 + 5.0;
+			  vec2 convertedPixel = vec2(nearestX/resolution[0], 1.0 - (nearestY/resolution[1]) );
+				vec4 tColor = texture2D( texture, convertedPixel );
+				gl_FragColor = tColor;
+			}
+			`,
+		backgroundShader: `
+		  void main() {
+				gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0);
+		  }
+		`,
 	},
 ];

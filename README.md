@@ -9,8 +9,9 @@ To run
 
 code parts
 
-- figure out vertex shaders
-- always have single color background
+- get correct image variables
+- make half tone renderers
+
 
 - music playing
 - music visualisation (d3)
