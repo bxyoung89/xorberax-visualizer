@@ -4,6 +4,8 @@ import renderer from './three-js-objects/renderer.js';
 import camera from './three-js-objects/camera.js';
 import clearScene from './clear-scene.js';
 
+const dimensionMultiplier = 4;
+
 class GifRenderer {
 	setGif(gifData, palette, vertexShader){
 		clearScene();
@@ -19,7 +21,8 @@ class GifRenderer {
 
 	addFramesToScene(palette, vertexShader) {
 		const imageDimensions = {width: 500, height: 373};
-		const {width , height}  = imageDimensions;
+		const width = imageDimensions.width * dimensionMultiplier;
+		const height = imageDimensions.height * dimensionMultiplier;
 		const backgroundGeometry = new THREE.PlaneGeometry(100000, 100000, 1, 1);
 		const backgroundMaterial = new THREE.ShaderMaterial({
 			fragmentShader: palette.backgroundShader,
