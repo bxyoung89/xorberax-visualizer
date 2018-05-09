@@ -20,7 +20,7 @@ class GifRenderer {
 	}
 
 	addFramesToScene(palette, vertexShader) {
-		const imageDimensions = {width: 500, height: 373};
+		const imageDimensions = this.gifData.imageData.dimensions;
 		const width = imageDimensions.width * dimensionMultiplier;
 		const height = imageDimensions.height * dimensionMultiplier;
 		const backgroundGeometry = new THREE.PlaneGeometry(100000, 100000, 1, 1);
@@ -31,7 +31,7 @@ class GifRenderer {
 		const backgroundMesh = new THREE.Mesh(backgroundGeometry, backgroundMaterial);
 		backgroundMesh.position.set(0, 0, 0);
 		scene.add(backgroundMesh);
-		Object.keys(this.gifData.frameData).forEach((key, index) => {
+		Object.keys(this.gifData.imageData.frameData).forEach((key, index) => {
 			const numberKey = Number.parseInt(key);
 			const geometry = new THREE.PlaneGeometry(width, height, 1, 1);
 			const material = new THREE.ShaderMaterial({
@@ -59,9 +59,9 @@ class GifRenderer {
 
 	runNextFrame() {
 		this.renderCurrentFrame();
-		const delay = this.gifData.frameData[this.currentFrameIndex];
+		const delay = this.gifData.imageData.frameData[this.currentFrameIndex];
 		this.lastTimeout = setTimeout(() => this.runNextFrame(), delay);
-		this.currentFrameIndex = (this.currentFrameIndex + 1) % Object.keys(this.gifData.frameData).length;
+		this.currentFrameIndex = (this.currentFrameIndex + 1) % Object.keys(this.gifData.imageData.frameData).length;
 	}
 
 	renderCurrentFrame() {

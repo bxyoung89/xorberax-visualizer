@@ -317,7 +317,7 @@ export default [
 			`,
 		backgroundShader: `
 		  void main() {
-				gl_FragColor = vec4(0.5803921568627451, 0, 0.8274509803921568, 1.0);
+				gl_FragColor = vec4(0.88235294117,0.23529411764,0.69019607843, 1.0);
 		  }
 		`,
 	},
@@ -397,9 +397,10 @@ export default [
 		`,
 	},
 	{
-		name: 'Pixelated',
-		luminosityFunction: (luminosity) => {
-			return black2RedScale(luminosity);
+		name: 'BIG AND CHUNKY, EXTRA FUNKY',
+		luminosityFunction: (luminosity, imageData) => {
+			const index = Math.round(luminosity * (imageData.colors.length -1));
+			return imageData.colors[index];
 		},
 		shader: `
 			uniform sampler2D texture;
