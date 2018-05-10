@@ -2,18 +2,18 @@ import AudioController from './audio-controller.js';
 import AudioVisualizer from './audio-visualizer.js';
 
 class AudioVisualizerControl {
-	constructor(){
+	constructor() {
 		this.animationRequest = undefined;
 	}
 
-	startAnimation(){
-		if(this.animationRequest){
+	startAnimation() {
+		if (this.animationRequest) {
 			return;
 		}
 		this.animationRequest = window.requestAnimationFrame(() => this.animate());
 	}
 
-	stopAnimation(){
+	stopAnimation() {
 		if (!this.animationRequest) {
 			return;
 		}
@@ -21,11 +21,16 @@ class AudioVisualizerControl {
 		this.animationRequest = undefined;
 	}
 
-	animate(){
+	animate() {
 		this.animationRequest = undefined;
 		const frequencyData = AudioController.getFrequencyData();
 		AudioVisualizer.animate(frequencyData);
 		this.startAnimation();
+	}
+
+	updateBasedOnPalette(palette, imageData) {
+		const {luminosityFunction} = palette;
+		AudioVisualizer.setRectFillColor(luminosityFunction(0, imageData));
 	}
 }
 

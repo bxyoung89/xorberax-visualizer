@@ -18,17 +18,20 @@ const runGifAnimationBasedOnState = () => {
 
 const renderEverythingBasedOnState = () => {
 	styleElementsToPalette(state.currentPalette, defaultImageColors);
+	AudioVisualizerControl.updateBasedOnPalette(state.currentPalette, defaultImageColors);
 	AnimationControl.stopAnimation();
 	if (state.currentImage.imageData === undefined) {
 		getImageData(state.currentImage.imageFolder).then((imageData) => {
 			state.currentImage.imageData = imageData;
 			runGifAnimationBasedOnState();
 			styleElementsToPalette(state.currentPalette, state.currentImage.imageData);
+			AudioVisualizerControl.updateBasedOnPalette(state.currentPalette, state.currentImage.imageData);
 		});
 		return;
 	}
 	runGifAnimationBasedOnState();
 	styleElementsToPalette(state.currentPalette, state.currentImage.imageData);
+	AudioVisualizerControl.updateBasedOnPalette(state.currentPalette, state.currentImage.imageData);
 };
 
 const updateState = (newState) => {

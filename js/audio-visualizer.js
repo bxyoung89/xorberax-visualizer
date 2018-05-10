@@ -11,6 +11,7 @@ class AudioVisualizer {
 		this.svg = d3.select(`#${elementId}`).append('svg').attr('width', this.totalWidth).attr('height', this.totalHeight);
 		this.barWidth = (this.totalWidth / numberOfFrequencies);
 		this.heightScale = d3.scaleLinear().domain([0,255]).range([0, this.totalHeight]);
+		this.rectFillColor = '#FFF';
 	}
 
 	animate(frequencyData){
@@ -27,7 +28,8 @@ class AudioVisualizer {
 			.attr('width', this.barWidth)
 			.attr('height', (d, i) => {
 				return this.heightScale(d);
-			});
+			})
+			.attr('fill', this.rectFillColor);
 
 		this.svg.selectAll('rect')
 			.data(frequencyData)
@@ -36,7 +38,12 @@ class AudioVisualizer {
 			})
 			.attr('height', (d, i) => {
 				return this.heightScale(d);
-			});
+			})
+			.attr('fill', this.rectFillColor);
+	}
+
+	setRectFillColor(newColor){
+		this.rectFillColor = newColor;
 	}
 }
 
