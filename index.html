@@ -114,6 +114,40 @@
 			.audio-player {
 				display: none;
 			}
+
+			.audio-visualization-container {
+				position: absolute;
+				left: 30px;
+				right: 30px;
+				bottom: 30px;
+				height: 100px;
+			}
+
+			.audio-visualization-wrapper {
+				position: relative;
+				width: 100%;
+				height: 100%;
+			}
+
+			.audio-visualization-background {
+				position: absolute;
+				top: 0;
+				left: 0;
+				bottom: 0;
+				right: 0;
+				filter: blur(5px);
+				opacity: 0.5;
+				z-index: 1;
+			}
+
+			.audio-visualization {
+				height: 100%;
+				width: 100%;
+				color: white;
+				font-size: 12px;
+				position: relative;
+				z-index: 2;
+			}
 		</style>
 	</head>
 	<body>
@@ -150,6 +184,15 @@
 						</label>
 						<select id="audio-selector">
 						</select>
+					</div>
+				</div>
+			</div>
+			<div class="audio-visualization-container" >
+				<div class="audio-visualization-wrapper">
+					<div class="audio-visualization-background"></div>
+					<div class="audio-visualization-background"></div>
+					<div class="audio-visualization" id="audio-visualization">
+
 					</div>
 				</div>
 			</div>

@@ -1,4 +1,5 @@
 import AnimationControl from './animation-control.js';
+import AudioVisualizerControl from './audio-visualizer-control.js';
 import GifRenderer from './gif-renderer.js';
 import styleElementsToPalette from './dom-manipulation/style-elements-to-palette.js';
 import setUpDropdowns from './dom-manipulation/set-up-dropdowns.js';
@@ -38,5 +39,6 @@ const updateState = (newState) => {
 	renderEverythingBasedOnState();
 };
 updateState(setUpDropdowns(updateState));
+AudioVisualizerControl.startAnimation();
 
 

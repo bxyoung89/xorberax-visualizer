@@ -5,6 +5,12 @@ class AudioController {
 	constructor(){
 		this.audioElement = document.getElementById(audioElementId);
 		this.audioElement.addEventListener('load', () => this.onSongLoaded());
+		const audioContext = new AudioContext();
+		const mediaElementSource = audioContext.createMediaElementSource(this.audioElement);
+		this.analyzer = audioContext.createAnalyser();
+		mediaElementSource.connect(this.analyzer);
+		mediaElementSource.connect(audioContext.destination);
+		this.frequencyData = new Uint8Array(this.analyzer.frequencyBinCount);
 	}
 
 	loadSong(audioInfo){
@@ -23,6 +29,11 @@ class AudioController {
 
 	onSongLoaded(){
 		this.audioElement.play();
+	}
+
+	getFrequencyData(){
+		this.analyzer.getByteFrequencyData(this.frequencyData);
+		return this.frequencyData;
 	}
 
 }
