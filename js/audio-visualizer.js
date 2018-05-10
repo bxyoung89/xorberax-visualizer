@@ -31,7 +31,6 @@ class AudioVisualizer {
 
 		this.svg.selectAll('rect')
 			.data(frequencyData)
-			.transition()
 			.attr('y', (d, i) => {
 				return this.totalHeight  - this.heightScale(d);
 			})

@@ -28,6 +28,7 @@ class AudioController {
 	}
 
 	onSongLoaded(){
+		this.audio.muted = false;
 		this.audioElement.play();
 	}
 
