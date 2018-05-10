@@ -7,6 +7,7 @@ To run
 
 
 
-code parts
-- music visualisation (d3)
-- add warning before you start playing music.
+TODO:
+- make it work on phones better
+- handle resizing.
+- maybe get more music?
