@@ -110,6 +110,10 @@
 				width: 100%;
 				display: block;
 			}
+
+			.audio-player {
+				display: none;
+			}
 		</style>
 	</head>
 	<body>
@@ -140,10 +144,17 @@
 						<select id="palette-selector">
 						</select>
 					</div>
+					<div class="select-with-label">
+						<label>
+							Wat ur jam?
+						</label>
+						<select id="audio-selector">
+						</select>
+					</div>
 				</div>
-
 			</div>
 		</div>
+		<audio id="audio-player" class="audio-player" loop ></audio>
 		<script src="./js/main.js" type="module">
 		</script>
 	</body>

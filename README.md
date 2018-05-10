@@ -8,6 +8,5 @@ To run
 
 
 code parts
-- music playing
 - music visualisation (d3)
-- track select
+- add warning before you start playing music.

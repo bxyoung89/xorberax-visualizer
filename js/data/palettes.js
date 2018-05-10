@@ -407,10 +407,12 @@ export default [
 			uniform vec2 resolution;
 			varying vec2 vUv;
 			void main() {
+				float squareSize = 20.0;
+				float halfSquare = squareSize / 2.0;
 			  float calculatedX = floor(vUv[0] * resolution[0]);
 			  float calculatedY = floor((1.0 - vUv[1]) * resolution[1]);
-			  float nearestX = floor(calculatedX / 10.0) * 10.0 + 5.0;
-			  float nearestY = floor(calculatedY / 10.0) * 10.0 + 5.0;
+			  float nearestX = floor(calculatedX / squareSize) * squareSize + halfSquare;
+			  float nearestY = floor(calculatedY / squareSize) * squareSize + halfSquare;
 			  vec2 convertedPixel = vec2(nearestX/resolution[0], 1.0 - (nearestY/resolution[1]) );
 				vec4 tColor = texture2D( texture, convertedPixel );
 				gl_FragColor = tColor;

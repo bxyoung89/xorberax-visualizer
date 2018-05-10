@@ -1,10 +1,13 @@
 import images from '../data/images.js';
 import palettes from '../data/palettes.js';
 import vertexShaders from '../data/vertex-shaders.js';
+import audio from '../data/audio.js';
+import AudioController from '../audio-controller.js';
 
 const imageSelectorId = 'image-selector';
 const paletteSelectorId = 'palette-selector';
 const vertexShaderSelectorId = 'vertex-shader-selector';
+const audioSelectorId = 'audio-selector';
 
 
 const setUpImageSelector = (onCurrentStateUpdated) => {
@@ -37,19 +40,37 @@ const setUpPaletteSelector = (onCurrentStateUpdated) => {
 	};
 };
 
-const setUpVertexShaderSelector = (onCurrentStateUpdated) => {
-	const vertexShaderSelector = document.getElementById(vertexShaderSelectorId);
-	vertexShaders.forEach((vertexShader, index) => {
+// const setUpVertexShaderSelector = (onCurrentStateUpdated) => {
+// 	const vertexShaderSelector = document.getElementById(vertexShaderSelectorId);
+// 	vertexShaders.forEach((vertexShader, index) => {
+// 		const option = document.createElement('option');
+// 		option.text = vertexShader.name;
+// 		option.value = index;
+// 		option.selected = index === 0;
+// 		vertexShaderSelector.add(option);
+// 	});
+// 	vertexShaderSelector.onchange = (e) => {
+// 		const currentVertexShader = vertexShaders[e.target.value];
+// 		onCurrentStateUpdated({currentVertexShader});
+// 	};
+// };
+
+
+const setUpAudioSelector = (onCurrentStateUpdated) => {
+	const audioSelector = document.getElementById(audioSelectorId);
+	audio.forEach((song, index) => {
+		const {artist, name} = song;
 		const option = document.createElement('option');
-		option.text = vertexShader.name;
+		option.text = `${artist} --- ${name}`;
 		option.value = index;
 		option.selected = index === 0;
-		vertexShaderSelector.add(option);
+		audioSelector.add(option);
 	});
-	vertexShaderSelector.onchange = (e) => {
-		const currentVertexShader = vertexShaders[e.target.value];
-		onCurrentStateUpdated({currentVertexShader});
+	audioSelector.onchange = (e) => {
+		const newSong = audio[e.target.value];
+		AudioController.loadSong(newSong);
 	};
+	AudioController.loadSong(audio[0]);
 };
 
 
@@ -58,9 +79,14 @@ export default (onCurrentStateUpdated) => {
 	document.addEventListener('DOMContentLoaded', function () {
 		setUpImageSelector(onCurrentStateUpdated);
 		setUpPaletteSelector(onCurrentStateUpdated);
-		setUpVertexShaderSelector(onCurrentStateUpdated);
+		// setUpVertexShaderSelector(onCurrentStateUpdated);
+		setUpAudioSelector(onCurrentStateUpdated);
 	}, false);
-	return {currentPalette: palettes[0], currentVertexShader: vertexShaders[0], currentImage: images[0]};
+	return {
+		currentPalette: palettes[0],
+		currentVertexShader: vertexShaders[0],
+		currentImage: images[0]
+	};
 };
 
 
