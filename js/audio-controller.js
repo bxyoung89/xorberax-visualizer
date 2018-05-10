@@ -1,8 +1,7 @@
 const audioElementId = 'audio-player';
 
-
 class AudioController {
-	constructor(){
+	constructor() {
 		this.audioElement = document.getElementById(audioElementId);
 		this.audioElement.addEventListener('load', () => this.onSongLoaded());
 		const audioContext = new AudioContext();
@@ -11,11 +10,15 @@ class AudioController {
 		mediaElementSource.connect(this.analyzer);
 		mediaElementSource.connect(audioContext.destination);
 		this.frequencyData = new Uint8Array(this.analyzer.frequencyBinCount);
+		document.addEventListener('click', () => {
+			audioContext.resume();
+			this.playAudio();
+		});
 	}
 
-	loadSong(audioInfo){
+	loadSong(audioInfo) {
 		this.audioElement.pause();
-		while(this.audioElement.firstChild){
+		while (this.audioElement.firstChild) {
 			this.audioElement.removeChild(this.audioElement.firstChild);
 		}
 		const newSource = document.createElement('source');
@@ -24,17 +27,26 @@ class AudioController {
 		this.audioElement.appendChild(newSource);
 		this.audioElement.load();
 		this.audioElement.volume = 0.4;
-		this.audioElement.play();
+		this.playAudio();
 	}
 
-	onSongLoaded(){
-		this.audio.muted = false;
-		this.audioElement.play();
+	onSongLoaded() {
+		this.playAudio();
 	}
 
-	getFrequencyData(){
+	getFrequencyData() {
 		this.analyzer.getByteFrequencyData(this.frequencyData);
 		return this.frequencyData;
+	}
+
+	playAudio() {
+		this.audioElement.muted = false;
+		const promise = this.audioElement.play();
+		if (promise) {
+			promise.then(() => {
+			}).catch((error) => {
+			})
+		}
 	}
 
 }

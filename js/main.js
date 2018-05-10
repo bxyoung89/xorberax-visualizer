@@ -16,22 +16,28 @@ const runGifAnimationBasedOnState = () => {
 	AnimationControl.startAnimation();
 };
 
-const renderEverythingBasedOnState = () => {
+const stopAnimationAndSetLoadingColors = () => {
 	styleElementsToPalette(state.currentPalette, defaultImageColors);
 	AudioVisualizerControl.updateBasedOnPalette(state.currentPalette, defaultImageColors);
 	AnimationControl.stopAnimation();
-	if (state.currentImage.imageData === undefined) {
-		getImageData(state.currentImage.imageFolder).then((imageData) => {
-			state.currentImage.imageData = imageData;
-			runGifAnimationBasedOnState();
-			styleElementsToPalette(state.currentPalette, state.currentImage.imageData);
-			AudioVisualizerControl.updateBasedOnPalette(state.currentPalette, state.currentImage.imageData);
-		});
-		return;
-	}
+};
+
+const renderEverytingBasedOnState= () => {
 	runGifAnimationBasedOnState();
 	styleElementsToPalette(state.currentPalette, state.currentImage.imageData);
 	AudioVisualizerControl.updateBasedOnPalette(state.currentPalette, state.currentImage.imageData);
+};
+
+const loadImage = () => {
+	stopAnimationAndSetLoadingColors();
+	if (state.currentImage.imageData === undefined) {
+		getImageData(state.currentImage.imageFolder).then((imageData) => {
+			state.currentImage.imageData = imageData;
+			renderEverytingBasedOnState();
+		});
+		return;
+	}
+	renderEverytingBasedOnState();
 };
 
 const updateState = (newState) => {
@@ -39,7 +45,7 @@ const updateState = (newState) => {
 		...state,
 		...newState,
 	};
-	renderEverythingBasedOnState();
+	loadImage();
 };
 updateState(setUpDropdowns(updateState));
 AudioVisualizerControl.startAnimation();

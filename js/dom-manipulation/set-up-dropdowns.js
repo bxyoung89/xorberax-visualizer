@@ -10,13 +10,13 @@ const vertexShaderSelectorId = 'vertex-shader-selector';
 const audioSelectorId = 'audio-selector';
 
 
-const setUpImageSelector = (onCurrentStateUpdated) => {
+const setUpImageSelector = (onCurrentStateUpdated, state) => {
 	const imageSelector = document.getElementById(imageSelectorId);
 	images.forEach((image, index) => {
 		const option = document.createElement('option');
 		option.text = image.name;
 		option.value = index;
-		option.selected = index === 0;
+		option.selected = state.currentImage === image;
 		imageSelector.add(option);
 	});
 	imageSelector.onchange = (e) => {
@@ -25,13 +25,13 @@ const setUpImageSelector = (onCurrentStateUpdated) => {
 	};
 };
 
-const setUpPaletteSelector = (onCurrentStateUpdated) => {
+const setUpPaletteSelector = (onCurrentStateUpdated, state) => {
 	const paletteSelector = document.getElementById(paletteSelectorId);
 	palettes.forEach((palette, index) => {
 		const option = document.createElement('option');
 		option.text = palette.name;
 		option.value = index;
-		option.selected = index === 0;
+		option.selected = palette === state.currentPalette;
 		paletteSelector.add(option);
 	});
 	paletteSelector.onchange = (e) => {
@@ -40,53 +40,37 @@ const setUpPaletteSelector = (onCurrentStateUpdated) => {
 	};
 };
 
-// const setUpVertexShaderSelector = (onCurrentStateUpdated) => {
-// 	const vertexShaderSelector = document.getElementById(vertexShaderSelectorId);
-// 	vertexShaders.forEach((vertexShader, index) => {
-// 		const option = document.createElement('option');
-// 		option.text = vertexShader.name;
-// 		option.value = index;
-// 		option.selected = index === 0;
-// 		vertexShaderSelector.add(option);
-// 	});
-// 	vertexShaderSelector.onchange = (e) => {
-// 		const currentVertexShader = vertexShaders[e.target.value];
-// 		onCurrentStateUpdated({currentVertexShader});
-// 	};
-// };
-
-
 const setUpAudioSelector = (onCurrentStateUpdated) => {
+	const currentSong = audio[Math.round(Math.random() * (audio.length -1))];
 	const audioSelector = document.getElementById(audioSelectorId);
 	audio.forEach((song, index) => {
 		const {artist, name} = song;
 		const option = document.createElement('option');
 		option.text = `${artist} --- ${name}`;
 		option.value = index;
-		option.selected = index === 0;
+		option.selected = song === currentSong;
 		audioSelector.add(option);
 	});
 	audioSelector.onchange = (e) => {
 		const newSong = audio[e.target.value];
 		AudioController.loadSong(newSong);
 	};
-	AudioController.loadSong(audio[0]);
+	AudioController.loadSong(currentSong);
 };
 
 
-
 export default (onCurrentStateUpdated) => {
-	document.addEventListener('DOMContentLoaded', function () {
-		setUpImageSelector(onCurrentStateUpdated);
-		setUpPaletteSelector(onCurrentStateUpdated);
-		// setUpVertexShaderSelector(onCurrentStateUpdated);
-		setUpAudioSelector(onCurrentStateUpdated);
-	}, false);
-	return {
-		currentPalette: palettes[0],
+	const state =  {
+		currentPalette: palettes[Math.round(Math.random() * (palettes.length - 1))],
 		currentVertexShader: vertexShaders[0],
-		currentImage: images[0]
+		currentImage: images[Math.round(Math.random() * (palettes.length - 1))]
 	};
+	document.addEventListener('DOMContentLoaded', function () {
+		setUpImageSelector(onCurrentStateUpdated, state);
+		setUpPaletteSelector(onCurrentStateUpdated, state);
+		setUpAudioSelector(onCurrentStateUpdated, state);
+	}, false);
+	return state;
 };
 
 

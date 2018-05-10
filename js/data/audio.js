@@ -6,7 +6,7 @@ export default [
 	},
 	{
 		artist: 'zooloo75',
-		name: 'That Euquals This',
+		name: 'That Equals This',
 		filePath: 'zooloo75/that-equals-this.mp3'
 	},
 ];
