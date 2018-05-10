@@ -41,7 +41,7 @@ const setUpPaletteSelector = (onCurrentStateUpdated, state) => {
 };
 
 const setUpAudioSelector = (onCurrentStateUpdated) => {
-	const currentSong = audio[Math.round(Math.random() * (audio.length -1))];
+	const currentSong = audio[Math.round(Math.random() * 10000) % audio.length];
 	const audioSelector = document.getElementById(audioSelectorId);
 	audio.forEach((song, index) => {
 		const {artist, name} = song;
@@ -61,9 +61,9 @@ const setUpAudioSelector = (onCurrentStateUpdated) => {
 
 export default (onCurrentStateUpdated) => {
 	const state =  {
-		currentPalette: palettes[Math.round(Math.random() * (palettes.length - 1))],
+		currentPalette: palettes[Math.round(Math.random() * 10000) % palettes.length],
 		currentVertexShader: vertexShaders[0],
-		currentImage: images[Math.round(Math.random() * (palettes.length - 1))]
+		currentImage: images[Math.round(Math.random() * 10000) % images.length]
 	};
 	document.addEventListener('DOMContentLoaded', function () {
 		setUpImageSelector(onCurrentStateUpdated, state);

@@ -3,7 +3,7 @@ cool site for some cool tunes
 
 
 To run
-`npm run gif2luminosity ./test.gif ./test`
+`npm run gif2data ./test.gif ./test`
 
 
 
