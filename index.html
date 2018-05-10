@@ -117,10 +117,10 @@
 
 			.audio-visualization-container {
 				position: absolute;
-				left: 30px;
-				right: 30px;
-				bottom: 30px;
-				height: 100px;
+				top: 25%;
+				left: 0;
+				right: 0;
+				bottom: 0;
 			}
 
 			.audio-visualization-wrapper {
@@ -137,15 +137,16 @@
 				right: 0;
 				opacity: 0.5;
 				z-index: 1;
+				display: none;
 			}
 
 			.audio-visualization {
 				height: 100%;
 				width: 100%;
-				color: white;
 				font-size: 12px;
 				position: relative;
 				z-index: 2;
+				opacity: 0.25;
 			}
 		</style>
 	</head>
@@ -159,6 +160,13 @@
 			</div>
 		</div>
 		<div class="body" id="body">
+			<div class="audio-visualization-container" >
+				<div class="audio-visualization-wrapper">
+					<div class="audio-visualization" id="audio-visualization">
+
+					</div>
+				</div>
+			</div>
 			<div class="controls">
 				<div class="controls-content">
 					<div class="controls-background"></div>
@@ -183,15 +191,6 @@
 						</label>
 						<select id="audio-selector">
 						</select>
-					</div>
-				</div>
-			</div>
-			<div class="audio-visualization-container" >
-				<div class="audio-visualization-wrapper">
-					<div class="audio-visualization-background"></div>
-					<div class="audio-visualization-background"></div>
-					<div class="audio-visualization" id="audio-visualization">
-
 					</div>
 				</div>
 			</div>

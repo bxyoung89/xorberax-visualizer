@@ -30,7 +30,7 @@ class AudioVisualizerControl {
 
 	updateBasedOnPalette(palette, imageData) {
 		const {luminosityFunction} = palette;
-		AudioVisualizer.setRectFillColor(luminosityFunction(0, imageData));
+		AudioVisualizer.setRectFillColor(luminosityFunction(1, imageData));
 	}
 }
 
