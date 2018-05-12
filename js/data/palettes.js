@@ -10,6 +10,12 @@ import gameboy from './palettes/gameboy.js';
 import gameboyHalftone from './palettes/gameboy-halftone.js';
 import america from './palettes/america.js';
 import americaHalftone from './palettes/america-halftone.js';
+import bumblebee from './palettes/bumblebee.js';
+import bumblebeeHalfTone from './palettes/bumblebee-halftone.js';
+import husky from './palettes/husky.js';
+import huskyHalftone from './palettes/husky-halftone.js';
+import classicTritone from './palettes/classic-tritone.js';
+import classicTritoneHalftone from './palettes/classic-tritone-halftone.js';
 
 export default [
 	virtualBoyHalftone,
@@ -24,4 +30,10 @@ export default [
 	pixelated,
 	america,
 	americaHalftone,
+	bumblebee,
+	bumblebeeHalfTone,
+	husky,
+	huskyHalftone,
+	classicTritone,
+	classicTritoneHalftone,
 ];
