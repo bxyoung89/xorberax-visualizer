@@ -10,6 +10,6 @@ export default `
 		vec4 color = mix(color1, color2, smoothstep(0.0, .33, stop));
 		color = mix(color, color3, smoothstep(.33, .66, stop));
 		color = mix(color, color4, smoothstep(.66, 1.0, stop));
-		return vec4(stop * color[0], stop * color[1], stop * color[2], 1.0);
+		return color;
 	}
 `;

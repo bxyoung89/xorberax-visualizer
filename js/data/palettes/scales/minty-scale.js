@@ -1,0 +1,1 @@
+export default d3.scaleLinear().domain([0, 0.25, 0.5, 0.75, 1]).range(['#005400', '#6ca100', '#c7dc70',  '#d7e0e2', '#f3f0e0']);

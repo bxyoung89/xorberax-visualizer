@@ -13,10 +13,3 @@ export default [
 		`,
 	}
 ];
-
-/*
-							<option value="basicLuminosity">Simple is Best</option>
-							<option value="basicPaletteLuminosity">Simple Colors</option>
-							<option value="paletteLuminosity" selected>Colorful</option>
-							<option value="halfTone">Half Full</option>
- */

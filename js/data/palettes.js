@@ -8,6 +8,8 @@ import viceCity from './palettes/vice-city.js';
 import viceCityHalftone from './palettes/vice-city-halftone.js';
 import gameboy from './palettes/gameboy.js';
 import gameboyHalftone from './palettes/gameboy-halftone.js';
+import america from './palettes/america.js';
+import americaHalftone from './palettes/america-halftone.js';
 
 export default [
 	virtualBoyHalftone,
@@ -20,4 +22,6 @@ export default [
 	gameboy,
 	gameboyHalftone,
 	pixelated,
+	america,
+	americaHalftone,
 ];
