@@ -1,3 +1,5 @@
+import pixelated from './palettes/pixelated.js';
+
 const black2RedScale = d3.scaleLinear().domain([0, 1]).range(['#000', '#f00']);
 const miamiScale = d3.scaleLinear().domain([0, 1]).range(['#E13CB0', '#38B5E6']);
 const rainbowScale = d3.scaleLinear().domain([0, 0.14, 0.28, 0.42, 0.56, 0.7, 0.84, 1]).range(['#9400D3', '#4B0082', '#0000ff', '#00ff00', '#ffff00', '#ff7f00', '#ff0000']);
@@ -396,32 +398,5 @@ export default [
 		  }
 		`,
 	},
-	{
-		name: 'BIG AND CHUNKY, EXTRA FUNKY',
-		luminosityFunction: (luminosity, imageData) => {
-			const index = Math.round(luminosity * (imageData.colors.length -1));
-			return imageData.colors[index];
-		},
-		shader: `
-			uniform sampler2D texture;
-			uniform vec2 resolution;
-			varying vec2 vUv;
-			void main() {
-				float squareSize = 20.0;
-				float halfSquare = squareSize / 2.0;
-			  float calculatedX = floor(vUv[0] * resolution[0]);
-			  float calculatedY = floor((1.0 - vUv[1]) * resolution[1]);
-			  float nearestX = floor(calculatedX / squareSize) * squareSize + halfSquare;
-			  float nearestY = floor(calculatedY / squareSize) * squareSize + halfSquare;
-			  vec2 convertedPixel = vec2(nearestX/resolution[0], 1.0 - (nearestY/resolution[1]) );
-				vec4 tColor = texture2D( texture, convertedPixel );
-				gl_FragColor = tColor;
-			}
-			`,
-		backgroundShader: `
-		  void main() {
-				gl_FragColor = vec4(0.0, 0.0, 0.0, 0.0);
-		  }
-		`,
-	},
+	pixelated,
 ];

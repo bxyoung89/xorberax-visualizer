@@ -44,4 +44,64 @@ export default [
 		name: 'Success',
 		filePath: 'zooloo75/success.mp3'
 	},
+	{
+		artist: 'Dural',
+		name: 'Sad AI',
+		filePath: 'dural/sad-ai.wav'
+	},
+	{
+		artist: 'Moscillate',
+		name: 'Pixel Swing',
+		filePath: 'moscillate/pixel-swing.wav'
+	},
+	{
+		artist: 'Moscillate',
+		name: 'Synthopia (feat. Garimastah)',
+		filePath: 'moscillate/synthopia-feat-garimastah.wav'
+	},
+	{
+		artist: 'Noordgroove',
+		name: 'Happy Step',
+		filePath: 'noordgroove/happy-step.wav'
+	},
+	{
+		artist: 'Savvier',
+		name: 'Warm Sea',
+		filePath: 'savvier/warm-sea.wav'
+	},
+	{
+		artist: 'Spaceinvader',
+		name: 'Activation',
+		filePath: 'spaceinvader/activation.wav'
+	},
+	{
+		artist: 'Spaceinvader',
+		name: 'Impact',
+		filePath: 'spaceinvader/impact.wav'
+	},
+	{
+		artist: 'Spaceinvader',
+		name: 'Lost Control',
+		filePath: 'spaceinvader/lost-control.wav'
+	},
+	{
+		artist: 'Spaceinvader',
+		name: 'Memory Lane',
+		filePath: 'spaceinvader/memory-lane.wav'
+	},
+	{
+		artist: 'Spaceinvader',
+		name: 'Overtake',
+		filePath: 'spaceinvader/overtake.wav'
+	},
+	{
+		artist: 'Tim Kubak',
+		name: 'Vinyl',
+		filePath: 'tim-kubak/vinyl.wav'
+	},
+	{
+		artist: 'Tim Kubak',
+		name: 'You Can\'t Leave',
+		filePath: 'tim-kubak/you-cant-leave.wav'
+	},
 ];
