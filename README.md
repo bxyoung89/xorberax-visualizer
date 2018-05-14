@@ -8,5 +8,5 @@ To run
 
 
 TODO:
-- make it work on phones better
-- handle resizing.
+- better palette picker
+- logo
