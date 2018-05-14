@@ -1,11 +1,15 @@
 const elementId = 'audio-visualization';
 
 const numberOfFrequencies = 1024;
-const spacing = 3;
 
 class AudioVisualizer {
 	constructor(){
 		this.element = document.getElementById(elementId);
+		this.updateVariables();
+	}
+
+	updateVariables() {
+		this.element.innerHTML = '';
 		this.totalWidth = this.element.clientWidth;
 		this.totalHeight = this.element.clientHeight;
 		this.svg = d3.select(`#${elementId}`).append('svg').attr('width', this.totalWidth).attr('height', this.totalHeight);

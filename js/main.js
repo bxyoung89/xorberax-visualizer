@@ -4,6 +4,8 @@ import GifRenderer from './gif-renderer.js';
 import styleElementsToPalette from './dom-manipulation/style-elements-to-palette.js';
 import setUpDropdowns from './dom-manipulation/set-up-dropdowns.js';
 import getImageData from './data/get-image-data.js';
+import renderer from "./three-js-objects/renderer.js";
+import camera from './three-js-objects/camera.js'
 
 let state = {};
 const gifRenderer = new GifRenderer();
@@ -50,4 +52,11 @@ const updateState = (newState) => {
 updateState(setUpDropdowns(updateState));
 AudioVisualizerControl.startAnimation();
 
-
+window.addEventListener('resize', () => {
+	const appBody = document.getElementById('body');
+	renderer.setSize(appBody.clientWidth, appBody.clientHeight);
+	renderEverytingBasedOnState();
+	AudioVisualizerControl.handleResize();
+	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();
+});
