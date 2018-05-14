@@ -10,4 +10,3 @@ To run
 TODO:
 - make it work on phones better
 - handle resizing.
-- maybe get more music?

@@ -16,6 +16,16 @@ import husky from './palettes/husky.js';
 import huskyHalftone from './palettes/husky-halftone.js';
 import classicTritone from './palettes/classic-tritone.js';
 import classicTritoneHalftone from './palettes/classic-tritone-halftone.js';
+import medical from './palettes/medical.js';
+import medicalHalfTone from './palettes/medical-halftone.js';
+import minty from './palettes/minty.js';
+import mintyHalfTone from './palettes/minty-halftone.js';
+import ocean from './palettes/ocean.js';
+import oceanHalfTone from './palettes/ocean-halftone.js';
+import sunflower from './palettes/sunflower.js';
+import sunflowerHalftone from './palettes/sunflower-halftone.js';
+import vintageMountain from './palettes/vintage-mountain.js';
+import vintageMountainHalfTone from './palettes/vintage-mountain-halftone.js';
 
 export default [
 	virtualBoyHalftone,
@@ -36,4 +46,14 @@ export default [
 	huskyHalftone,
 	classicTritone,
 	classicTritoneHalftone,
+	medical,
+	medicalHalfTone,
+	minty,
+	mintyHalfTone,
+	ocean,
+	oceanHalfTone,
+	sunflower,
+	sunflowerHalftone,
+	vintageMountain,
+	vintageMountainHalfTone,
 ];
