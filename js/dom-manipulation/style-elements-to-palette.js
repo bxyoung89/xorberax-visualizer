@@ -2,6 +2,8 @@ const headerClass = 'header';
 const controlsClass = 'controls';
 const controlsBackground = 'controls-background';
 const controlsBorder = 'controls-border';
+const logoWrapperContainerClass = 'logo-wrapper';
+const logoClass = 'logo';
 
 export default (palette, imageData) => {
 	const {luminosityFunction} = palette;
@@ -19,4 +21,13 @@ export default (palette, imageData) => {
 
 	const controlsBorderElement = document.getElementsByClassName(controlsBorder)[0];
 	controlsBorderElement.style.borderColor = luminosityFunction(0, imageData);
+
+	const logoWrapperContainer = document.getElementsByClassName(logoWrapperContainerClass)[0];
+	logoWrapperContainer.style.background = luminosityFunction(1, imageData);
+
+	const logos = document.getElementsByClassName(logoClass);
+	for(let x = 0; x < logos.length; x+=1){
+		const logo = logos[x];
+		logo.style.fill = luminosityFunction(0.25 * x, imageData);
+	}
 };
