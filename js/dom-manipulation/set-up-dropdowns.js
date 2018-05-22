@@ -3,10 +3,10 @@ import palettes from '../data/palettes.js';
 import vertexShaders from '../data/vertex-shaders.js';
 import audio from '../data/audio.js';
 import AudioController from '../audio-controller.js';
+import UrlManipulator from '../url-manipulator.js';
 
 const imageSelectorId = 'image-selector';
 const paletteSelectorId = 'palette-selector';
-const vertexShaderSelectorId = 'vertex-shader-selector';
 const audioSelectorId = 'audio-selector';
 
 
@@ -40,8 +40,8 @@ const setUpPaletteSelector = (onCurrentStateUpdated, state) => {
 	};
 };
 
-const setUpAudioSelector = (onCurrentStateUpdated) => {
-	const currentSong = audio[Math.round(Math.random() * 10000) % audio.length];
+const setUpAudioSelector = (onCurrentStateUpdated, state) => {
+	const {currentSong} = state;
 	const audioSelector = document.getElementById(audioSelectorId);
 	audio.forEach((song, index) => {
 		const {artist, name} = song;
@@ -54,16 +54,17 @@ const setUpAudioSelector = (onCurrentStateUpdated) => {
 	audioSelector.onchange = (e) => {
 		const newSong = audio[e.target.value];
 		AudioController.loadSong(newSong);
+		onCurrentStateUpdated({currentSong: newSong});
 	};
 	AudioController.loadSong(currentSong);
 };
 
 
 export default (onCurrentStateUpdated) => {
-	const state =  {
-		currentPalette: palettes[Math.round(Math.random() * 10000) % palettes.length],
+	// todo read here
+	const state = {
 		currentVertexShader: vertexShaders[0],
-		currentImage: images[Math.round(Math.random() * 10000) % images.length]
+		...UrlManipulator.readFromUrl(),
 	};
 	document.addEventListener('DOMContentLoaded', function () {
 		setUpImageSelector(onCurrentStateUpdated, state);

@@ -6,6 +6,7 @@ import setUpDropdowns from './dom-manipulation/set-up-dropdowns.js';
 import getImageData from './data/get-image-data.js';
 import renderer from "./three-js-objects/renderer.js";
 import camera from './three-js-objects/camera.js'
+import UrlManipulator from './url-manipulator.js';
 
 let state = {};
 const gifRenderer = new GifRenderer();
@@ -28,6 +29,7 @@ const renderEverytingBasedOnState= () => {
 	runGifAnimationBasedOnState();
 	styleElementsToPalette(state.currentPalette, state.currentImage.imageData);
 	AudioVisualizerControl.updateBasedOnPalette(state.currentPalette, state.currentImage.imageData);
+	UrlManipulator.writeToUrl(state);
 };
 
 const loadImage = () => {
