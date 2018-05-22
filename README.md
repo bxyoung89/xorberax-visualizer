@@ -1,4 +1,4 @@
-![alt text](https://raw.githubusercontent.com/bxyoung89/xorberax-visualizer/master/logo.png "Xorberax Logo")
+![alt text](https://github.com/bxyoung89/xorberax-visualizer/blob/master/real%20logo.png?raw=true "Xorberax Logo")
 
 
 Hey, thanks for checking out the repo. Hope you enjoyed the site!
