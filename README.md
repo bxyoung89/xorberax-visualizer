@@ -1,4 +1,4 @@
-[logo]: ./regular-logo.svg "Xorberax logo"
+[logo]: https://github.com/bxyoung89/xorberax-visualizer/raw/master/regular-logo.svg "Xorberax logo"
 
 
 Hey, thanks for checking out the repo. Hope you enjoyed the site!
